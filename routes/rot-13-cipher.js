@@ -15,12 +15,6 @@ function EncryptRot13(plaintext) {
     }
     return result;
 }
-// function EncryptSubstitution(){}
-// function EncryptAffine(){}
-// function EncryptRailFence(){}
-// function EncryptColumnar(){}
-// function EncryptPlayFair(){}
-// function EncryptHillClimbing(){}
 
 app.post('/encrypt-rot13',async(req,res)=>{
     try{

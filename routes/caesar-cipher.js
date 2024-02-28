@@ -15,13 +15,6 @@ function EncryptCaesar(plaintext, key) {
     }
     return result;
 }
-// function EncryptSubstitution(){}
-// function EncryptAffine(){}
-// function EncryptRailFence(){}
-// function EncryptColumnar(){}
-// function EncryptPlayFair(){}
-// function EncryptHillClimbing(){}
-
 
 app.post('/encrypt-caesar',async(req,res)=>{
     try{
