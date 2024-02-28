@@ -1,7 +1,9 @@
 const express = require('express');
 const app=express();
 const dotenv=require('dotenv');
-const CipherRoutes=require('./routes/cipher');
+const rot13=require('./routes/rot-13-cipher');
+const caesar=require('./routes/caesar-cipher');
+
 dotenv.config();
 app.use(express.json());
 
@@ -13,4 +15,5 @@ app.listen(process.env.PORT||3001,()=>{
     console.log("Server Up");
 });
 
-app.use('/',CipherRoutes);
+app.use('/',rot13);
+app.use('/',caesar);
