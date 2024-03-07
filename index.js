@@ -3,6 +3,7 @@ const app=express();
 const dotenv=require('dotenv');
 const rot13=require('./routes/rot-13-cipher');
 const caesar=require('./routes/caesar-cipher');
+const railfence=require('./routes/railfence-cipher')
 
 dotenv.config();
 app.use(express.json());
@@ -17,3 +18,4 @@ app.listen(process.env.PORT||3001,()=>{
 
 app.use('/',rot13);
 app.use('/',caesar);
+app.use('/',railfence);

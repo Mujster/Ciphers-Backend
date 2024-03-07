@@ -7,3 +7,4 @@ Next
 
 `RailFence`
 `Playfair`
+`Hill Climbing`
