@@ -16,6 +16,21 @@ function EncryptRot13(plaintext) {
     return result;
 }
 
+function DecryptRot13(ciphertext) {
+    ciphertext=ciphertext.toLowerCase();
+    let result = '';
+    for (let i = 0; i < ciphertext.length; i++) {
+        if (ciphertext[i] !== ' ') {
+            let temp = 97;
+            let encrypted = String.fromCharCode((ciphertext.charCodeAt(i) - temp - 13) % 26 + temp);
+            result += encrypted;
+        } else {
+            result += ' ';
+        }
+    }
+    return result;
+}
+
 app.post('/encrypt-rot13',async(req,res)=>{
     try{
         const {plaintext}=req.body;
@@ -25,6 +40,22 @@ app.post('/encrypt-rot13',async(req,res)=>{
         const cipher=EncryptRot13(plaintext);
         if(cipher){
           return res.status(200).json({message:cipher});
+        }
+    }
+    catch(err){
+        return res.status(400).json(err);
+    }
+});
+
+app.post('/encrypt-rot13',async(req,res)=>{
+    try{
+        const {cipher}=req.body;
+        if(!cipher){
+           return res.status(400).json("No Cipher");
+        }
+        const plaintext=DecryptRot13(cipher);
+        if(cipher){
+          return res.status(200).json({message:plaintext});
         }
     }
     catch(err){
