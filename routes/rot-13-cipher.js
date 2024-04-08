@@ -35,7 +35,7 @@ app.post('/encrypt-rot13',async(req,res)=>{
     try{
         const {plaintext}=req.body;
         if(!plaintext){
-           return res.status(400).json("No Plaintext");
+           return res.status(400).json("No Input");
         }
         const cipher=EncryptRot13(plaintext);
         if(cipher){
