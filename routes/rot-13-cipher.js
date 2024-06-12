@@ -47,7 +47,7 @@ app.post('/encrypt-rot13',async(req,res)=>{
     }
 });
 
-app.post('/encrypt-rot13',async(req,res)=>{
+app.post('/decrypt-rot13',async(req,res)=>{
     try{
         const {cipher}=req.body;
         if(!cipher){
