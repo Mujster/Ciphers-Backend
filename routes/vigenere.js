@@ -46,9 +46,6 @@ function decrypt(text,key){
 
     return decrypted;
 }
-app.get('/yelo',(req,res)=>{
-    res.json("jellp");
-})
 
 app.post('/encrypt-vigenere',(req,res)=>{
     const {plaintext,key}=req.body;
