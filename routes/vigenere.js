@@ -1,7 +1,5 @@
-const express=require('express')
-const app=express()
 
-function encrypt(text,key){
+function encryptVigenere(text,key){
     const A = 'A'.charCodeAt(0);
     const Z = 'Z'.charCodeAt(0);
 
@@ -23,7 +21,7 @@ function encrypt(text,key){
     }
     return encrypted;
 }
-function decrypt(text,key){
+function decryptVigenere(text,key){
     const A = 'A'.charCodeAt(0);
     const Z = 'Z'.charCodeAt(0);
 
@@ -47,32 +45,8 @@ function decrypt(text,key){
     return decrypted;
 }
 
-app.post('/encrypt-vigenere',(req,res)=>{
-    const {plaintext,key}=req.body;
-    if(!plaintext||!key){
-        return res.status(400).json("No Plaintext Or Key");
-    }
-    try{
-        const encrypted=encrypt(plaintext,key);
-        res.status(200).json({message:encrypted});
-    }
-    catch(err){
-        return res.status(400).json({err:err.message});
-    }
-});
 
-app.post('/decrypt-vigenere',(req,res)=>{
-    const {ciphertext,key}=req.body;
-    if(!ciphertext||!key){
-        return res.status(400).json("No Plaintext Or Key");
-    }
-    try{
-        const decrypted=decrypt(ciphertext,key);
-        res.status(200).json({message:decrypted});
-    }
-    catch(err){
-        return res.status(400).json(err);
-    }
-});
-
-module.exports=app;
+module.exports={
+    encryptVigenere,
+    decryptVigenere
+}

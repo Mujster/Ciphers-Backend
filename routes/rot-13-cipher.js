@@ -1,5 +1,3 @@
-const express = require('express');
-const app=express.Router();
 
 function EncryptRot13(plaintext) {
     plaintext=plaintext.toLowerCase();
@@ -31,36 +29,8 @@ function DecryptRot13(ciphertext) {
     return result;
 }
 
-app.post('/encrypt-rot13',async(req,res)=>{
-    try{
-        const {plaintext}=req.body;
-        if(!plaintext){
-           return res.status(400).json("No Input");
-        }
-        const cipher=EncryptRot13(plaintext);
-        if(cipher){
-          return res.status(200).json({message:cipher});
-        }
-    }
-    catch(err){
-        return res.status(400).json(err);
-    }
-});
 
-app.post('/decrypt-rot13',async(req,res)=>{
-    try{
-        const {cipher}=req.body;
-        if(!cipher){
-           return res.status(400).json("No input");
-        }
-        const plaintext=DecryptRot13(cipher);
-        if(cipher){
-          return res.status(200).json({message:plaintext});
-        }
-    }
-    catch(err){
-        return res.status(400).json(err);
-    }
-});
-
-module.exports=app;
+module.exports = {
+  EncryptRot13,
+  DecryptRot13
+};

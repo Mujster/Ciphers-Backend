@@ -1,5 +1,3 @@
-const express = require('express');
-const app=express.Router();
 
 function EncryptCaesar(plaintext, key) {
     plaintext=plaintext.toLowerCase();
@@ -31,37 +29,4 @@ function DecryptCaesar(cipher,key){
     return result;
 }
 
-app.post('/encrypt-caesar',async(req,res)=>{
-    try{
-        const {plaintext,key}=req.body;
-        if(!plaintext){
-           return res.status(400).json("No Plaintext");
-        }
-        const cipher=EncryptCaesar(plaintext,key);
-        if(cipher){
-           return res.status(200).json({message:cipher});
-        }
-        return res.status(400).json("Unknown Errr");
-    }
-    catch(err){
-        res.status(400).json(err);
-    }
-});
-
-app.post('/decrypt-caesar',async(req,res)=>{
-    try{
-        const {cipher,key}=req.body;
-        if(!cipher||!key){
-            return res.status(400).json("No input");
-        }
-        const plaintext=DecryptCaesar(cipher,key);
-        if(plaintext){
-            return res.status(200).json({message:plaintext});
-        }
-        return res.status(400).json('Unknown Err');
-    }
-    catch(err){
-        res.status(400).json(err);
-    }
-});
-module.exports=app;
+module.exports = { EncryptCaesar, DecryptCaesar };

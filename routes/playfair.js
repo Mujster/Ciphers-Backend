@@ -1,5 +1,3 @@
-const express = require('express');
-const app=express();
 
 function generateMatrix(key){
     let temp = '';
@@ -39,7 +37,7 @@ function returnIdx(matrix,ch){
     return null;
 }
 
-function encrypt(plaintext,key){
+function encryptPlayfair(plaintext,key){
     let matrix=generateMatrix(key);
     let text=plaintext.toUpperCase().replace(/J/g, 'I').replace(/[^A-Z]/g, '');
     if(text.length%2!==0){
@@ -66,7 +64,7 @@ function encrypt(plaintext,key){
     }
     return cipher;
 }
-function decrypt(ciphertext,key){
+function decryptPlayfair(ciphertext,key){
     let matrix=generateMatrix(key);
     let text=ciphertext.toUpperCase().replace(/J/g, 'I').replace(/[^A-Z]/g,'');
     let plain='';
@@ -88,32 +86,9 @@ function decrypt(ciphertext,key){
     return plain;
 }
 
-app.post('/encrypt-playfair',(req,res)=>{
-    try{
-        const {plaintext,key}=req.body;
-        if(!plaintext||!key){
-            return res.status(400).json("No Plaintext or Key");
-        }
-        const encrypted=encrypt(plaintext,key);
-        res.status(200).json({message:encrypted});     
-    }
-    catch(err){
-        return res.status(400).json({err:err.message});
-    }
-});
 
-app.post('/decrypt-playfair',(req,res)=>{
-    try{
-        const {ciphertext,key}=req.body;
-        if(!ciphertext||!key){
-            return res.status(400).json("No ciphertext or Key");
-        }
-        const decrypted=decrypt(ciphertext,key);
-        res.status(200).json({message:decrypted});  
-    }
-    catch(err){
-        return res.status(400).json({err:err.message});
-    }
-});
 
-module.exports=app;
+module.exports={
+    encryptPlayfair,
+    decryptPlayfair
+};
